@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Surprise for Roya Besharat ✨</title>
+
+  <!-- کتابخانه کانفتی (شادی‌پاش) -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700;900&display=swap');
+
+    :root {
+      --bg-gradient: linear-gradient(135deg, #0d0614 0%, #1a0826 50%, #080313 100%);
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(236, 72, 153, 0.3);
+      --accent-pink: #ff2a8d;
+      --accent-purple: #a855f7;
+      --neon-glow: 0 0 25px rgba(255, 42, 141, 0.4);
+      --text-main: #f3e8ff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Vazirmatn', 'Tahoma', sans-serif;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      background: #0d0614;
+      background-image: var(--bg-gradient);
+      color: var(--text-main);
+      overflow-y: auto !important;
+      overflow-x: hidden;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1050px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 35px;
+      margin: 0 auto;
+    }
+
+    /* دکمه پخش صدا شناور در بالای صفحه */
+    .audio-player-banner {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: linear-gradient(135deg, #ff2a8d, #a855f7);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.95rem;
+      z-index: 9999;
+      box-shadow: 0 0 20px rgba(255, 42, 141, 0.7);
+      border: 2px solid #ffffff;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .audio-player-banner:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 30px rgba(255, 42, 141, 1);
+    }
+
+    /* هدر اصلی */
+    .header-box {
+      text-align: center;
+      padding: 10px;
+      margin-top: 20px;
+    }
+
+    .header-title {
+      font-size: 2.2rem;
+      font-weight: 900;
+      background: linear-gradient(90deg, #ff2a8d, #c084fc, #38bdf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    .header-sub {
+      font-size: 1.1rem;
+      color: #cbd5e1;
+      font-weight: 300;
+    }
+
+    /* گرید کارت‌ها */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      width: 100%;
+    }
+
+    .card {
+      background: var(--glass-bg);
+      border: 1.5px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 18px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-pink);
+      box-shadow: var(--neon-glow);
+    }
+
+    .card-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba(255, 42, 141, 0.9);
+      color: white;
+      font-size: 0.75rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-weight: bold;
+      z-index: 2;
+    }
+
+    .img-wrapper {
+      width: 100%;
+      height: 320px;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 15px;
+      background: rgba(0,0,0,0.3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .card-desc {
+      font-size: 0.92rem;
+      color: #e9d5ff;
+      line-height: 1.6;
+    }
+
+    /* بنر متنی اصلی */
+    .main-banner {
+      background: rgba(25, 10, 40, 0.85);
+      border: 2px solid rgba(236, 72, 153, 0.4);
+      border-radius: 24px;
+      padding: 35px 25px;
+      text-align: center;
+      box-shadow: 0 0 40px rgba(168, 85, 247, 0.2);
+      backdrop-filter: blur(20px);
+      width: 100%;
+    }
+
+    .main-banner h2 {
+      font-size: 1.6rem;
+      color: #ff7ce5;
+      margin-bottom: 15px;
+    }
+
+    .main-banner p {
+      font-size: 1.1rem;
+      line-height: 2;
+      color: #f1f5f9;
+    }
+
+    /* دکمه سورپرایز */
+    .surprise-btn {
+      background: linear-gradient(135deg, #ff2a8d 0%, #9333ea 100%);
+      color: white;
+      border: none;
+      padding: 16px 45px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 0 25px rgba(255, 42, 141, 0.6);
+      transition: all 0.3s ease;
+      margin-top: 20px;
+    }
+
+    .surprise-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 40px rgba(255, 42, 141, 0.9);
+    }
+
+    /* بخش مخفی سوپرایز */
+    .hidden-box {
+      display: none;
+      margin-top: 25px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      border: 1px dashed var(--accent-pink);
+    }
+
+    .cat-meme-grid {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+    }
+
+    .cat-meme-grid img {
+      width: 130px;
+      height: 130px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 2px solid #a855f7;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- دکمه کنترل موزیک -->
+  <button class="audio-player-banner" id="musicToggleBtn" onclick="toggleAudio()">
+    <span id="musicIcon">🎵</span> <span id="musicText">پخش آهنگ پس‌زمینه</span>
+  </button>
+
+  <!-- فایل صوتی مطمئن -->
+  <audio id="bgMusic" src="https://actions.google.com/sounds/v1/ambiences/happy_party.ogg" loop preload="auto"></audio>
+
+  <div class="container">
+    
+    <!-- هدر -->
+    <div class="header-box">
+      <h1 class="header-title">👑 VIP Page For Roya Besharat 👑</h1>
+      <p class="header-sub">هیچ مناسبتی نیست، فقط خواستم یادآوری کنم چقدر باصفا و دوست‌داشتنی هستی! ✨🌸</p>
+    </div>
+
+    <!-- گرید کارت‌های عکس -->
+    <div class="cards-grid">
+      
+      <!-- عکس ۱ -->
+      <div class="card">
+        <div class="card-badge">مود: گل و ناز 🌸</div>
+        <div class="img-wrapper">
+          <img src="c:\Users\shazia\OneDrive\WhatsApp Image 2026-08-13 at 15.35.01 - Copy.jpeg" alt="Roya Red Dress" onerror="this.src='https://placehold.co/400x500/2a0836/ff2a8d?text=Image+1'">
+        </div>
+        <div class="card-title">شاه‌کار فصل سرخ! ❤️</div>
+        <div class="card-desc">
+          گل سفید لای موها، لباس قرمزِ جذاب و یک لبخند شیرین. از آن عکس‌های قشنگی که پر از شادابی و اصالت است!
+        </div>
+      </div>
+
+      <!-- عکس ۲ -->
+      <div class="card">
+        <div class="card-badge">مود: طبیعت و آرامش 🌿</div>
+        <div class="img-wrapper">
+          <img src="c:\Users\shazia\OneDrive\WhatsApp Image 2026-08-13 at 15.37.22.jpeg" alt="Roya Nature Full" onerror="this.src='https://placehold.co/400x500/2a0836/ff2a8d?text=Image+2'">
+        </div>
+        <div class="card-title">ژست شیک در دل طبیعت! 🌲</div>
+        <div class="card-desc">
+          ایستاده وسط کوه و سرسبزی با استایلی مرتب؛ قابی که حسِ آزادی، طراوت و انرژی مثبت را منتقل می‌کند.
+        </div>
+      </div>
+
+      <!-- عکس ۳ -->
+      <div class="card">
+        <div class="card-badge">مود: مدرن و خفن 😎</div>
+        <div class="img-wrapper">
+          <img src="c:\Users\shazia\OneDrive\WhatsApp Image 2026-08-13 at 15.35.02.jpeg" alt="Roya Casual White Tee" onerror="this.src='https://placehold.co/400x500/2a0836/ff2a8d?text=Image+3'">
+        </div>
+        <div class="card-title">استایل کژوال و جذاب ✨</div>
+        <div class="card-desc">
+          تیشرت سفید، گردنبند خفن و یک صمیمیت خاص در چهره. قابی کاملاً امروزی، باحال و پر از حس خوب رفاقتی.
+        </div>
+      </div>
+
+      <!-- عکس ۴ -->
+      <div class="card">
+        <div class="card-badge">مود: اصالت و وقار ✨</div>
+        <div class="img-wrapper">
+          <img src="c:\Users\shazia\OneDrive\WhatsApp Image 2026-08-13 at 15.31.35.jpeg" alt="Roya Blue Dress White Scarf" onerror="this.src='https://placehold.co/400x500/2a0836/ff2a8d?text=Image+4'">
+        </div>
+        <div class="card-title">استایل شیک و ناز! 💙</div>
+        <div class="card-desc">
+          یک قاب فوق‌العاده قشنگ با لباس سنتی آبی و شال سفید. از آن عکس‌هایی که هم وقار دارد، هم مهربانی از نگاهش می‌بارد.
+        </div>
+      </div>
+
+      <!-- عکس ۵ -->
+      <div class="card">
+        <div class="card-badge">مود: رفیقِ مهربانِ حیوانات 🐱</div>
+        <div class="img-wrapper">
+          <img src="c:\Users\shazia\OneDrive\WhatsApp Image 2026-08-13 at 16.36.35.jpeg" alt="Roya with Cat" onerror="this.src='https://placehold.co/400x500/2a0836/ff2a8d?text=Image+5'">
+        </div>
+        <div class="card-title">رویا و رفیق پشمالویش! 🐾</div>
+        <div class="card-desc">
+          صفا و مهربانی یعنی این عکس! معلوم نیست گربه بیشتر به رویا پناه آورده یا رویا عاشق این گربه‌است. یک عکس پر از آرامش و حسِ خوب.
+        </div>
+      </div>
+
+      <!-- عکس ۶ -->
+      <div class="card">
+        <div class="card-badge">مود: طبیعت‌گردی و انرژی 🎒</div>
+        <div class="img-wrapper">
+          <img src="c:\Users\shazia\OneDrive\WhatsApp Image 2026-08-13 at 15.37.23.jpeg" alt="Roya Short Hair Nature" onerror="this.src='https://placehold.co/400x500/2a0836/ff2a8d?text=Image+6'">
+        </div>
+        <div class="card-title">آماده برای فتح مسیرها! 🌿</div>
+        <div class="card-desc">
+          موهای کوتاه، استایل شیکِ جلیقه و یک مسیر سبز. دقیقاً همان رویاِ پرانرژی و باحالی که همیشه آماده‌ی خاطره‌سازی است.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- بنر پیام اصلی -->
+    <div class="main-banner">
+      <h2>رویا جان، مرسی که این‌قدر باصفا و دوست‌داشتنی هستی! ❤️✨</h2>
+      <p>
+        بعضی از آدم‌ها با حضورشان فضای اطراف را گرم‌تر و قشنگ‌تر می‌کنند. رویا جان، از ته دل خوشحالیم که هستی؛  
+        با همه‌چیزت: از مهربانی‌ات با حیوانات گرفته تا استایل‌های شیک و انرژی مثبتی که همیشه همراه داری.  
+        امیدواریم زندگی‌ات همیشه پر از خنده‌های از ته دل، سفرهای قشنگ و لحظه‌های درخشان باشد! 🌸💫
+      </p>
+
+      <div id="surpriseContent" class="hidden-box">
+        <h3 style="color: #ff7ce5; margin-bottom: 10px;">🎉 سورپرایز ویژه گربه‌ها برای رویا! 🎉</h3>
+        <p>ارتش گربه‌ها رسماً رویا را به عنوان «مهربان‌ترین و باحال‌ترین رفیق سال» انتخاب کردند! 😎👇</p>
+        <div class="cat-meme-grid">
+          <img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?q=80&w=300" alt="Cat 1">
+          <img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?q=80&w=300" alt="Cat 2">
+          <img src="https://images.unsplash.com/photo-1543852786-1cf6624b9987?q=80&w=300" alt="Cat 3">
+        </div>
+      </div>
+
+      <button class="surprise-btn" onclick="triggerSurprise()">
+        <span>کلیک کن برای سورپرایز ویژه!</span> 🎁✨
+      </button>
+    </div>
+
+  </div>
+
+  <script>
+    var audio = document.getElementById("bgMusic");
+    var musicText = document.getElementById("musicText");
+    var musicIcon = document.getElementById("musicIcon");
+
+    function startMusic() {
+      audio.play().then(function() {
+        musicText.innerText = "آهنگ در حال پخش...";
+        musicIcon.innerText = "🔊";
+      }).catch(function(error) {
+        console.log("مرورگر مانع پخش خودکار شد. منتظر کلیک کاربر است.");
+      });
+    }
+
+    function toggleAudio() {
+      if (audio.paused) {
+        audio.play();
+        musicText.innerText = "آهنگ در حال پخش...";
+        musicIcon.innerText = "🔊";
+      } else {
+        audio.pause();
+        musicText.innerText = "پخش آهنگ پس‌زمینه";
+        musicIcon.innerText = "🔇";
+      }
+    }
+
+    window.addEventListener('click', function() {
+      if (audio.paused) {
+        startMusic();
+      }
+    }, { once: true });
+
+    function triggerSurprise() {
+      startMusic();
+
+      var box = document.getElementById("surpriseContent");
+      box.style.display = "block";
+
+      var duration = 3.5 * 1000;
+      var animationEnd = Date.now() + duration;
+
+      var interval = setInterval(function() {
+        var timeLeft = animationEnd - Date.now();
+
+        if (timeLeft <= 0) {
+          return clearInterval(interval);
+        }
+
+        confetti({
+          particleCount: 7,
+          angle: 60,
+          spread: 70,
+          origin: { x: 0, y: 0.7 }
+        });
+
+        confetti({
+          particleCount: 7,
+          angle: 120,
+          spread: 70,
+          origin: { x: 1, y: 0.7 }
+        });
+
+        confetti({
+          particleCount: 10,
+          spread: 100,
+          origin: { x: 0.5, y: 0.5 }
+        });
+      }, 150);
+    }
+
+    window.onload = function() {
+      confetti({
+        particleCount: 40,
+        spread: 80,
+        origin: { y: 0.6 }
+      });
+    };
+  </script>
+</body>
+</html>
